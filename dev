@@ -1,0 +1,10 @@
+#! /bin/bash
+
+case $1 in
+up) ./vendor/bin/sail up -d ;;
+down) ./vendor/bin/sail stop ;;
+restart) ./vendor/bin/sail stop && ./vendor/bin/sail up -d ;;
+logs) ./vendor/bin/sail logs -f ;;
+sail) alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail' ;;
+*) echo "Comando não encontrado" ;;
+esac

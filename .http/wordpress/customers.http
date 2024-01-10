@@ -1,0 +1,23 @@
+### All Customers
+
+GET {{WP_URL}}/wp-json/wc/v3/customers
+Authorization: Basic {{WP_CONSUMER_KEY}} {{WP_CONSUMER_SECRET}}
+
+### Retrieve a Customer
+
+GET {{WP_URL}}/wp-json/wc/v3/customers/4
+Authorization: Basic {{WP_CONSUMER_KEY}} {{WP_CONSUMER_SECRET}}
+
+### Create a Customer
+
+POST {{WP_URL}}/wp-json/wc/v3/customers
+Authorization: Basic {{WP_CONSUMER_KEY}} {{WP_CONSUMER_SECRET}}
+Content-Type: application/json
+
+{
+    "email": "consumidor@lohl.com.br",
+    "password": "hNxZJR1cSlKBBOa",
+    "first_name": "Consumidor",
+    "last_name": "Final",
+    "username": "consumidor.lohl"
+}

@@ -1,0 +1,49 @@
+### Authenticate
+
+POST http://localhost:8082/api/authenticate
+Content-Type: application/json
+
+{
+    "cpf": "1212312312"
+}
+
+### Contracts
+
+POST http://localhost:8082/api/contracts
+Content-Type: application/json
+
+{
+    "customer_id": 1
+}
+
+### Billings (Open)
+
+POST http://localhost:8082/api/billings/open
+Content-Type: application/json
+
+{
+    "customer_id": 1
+}
+
+### Billings (Pending)
+
+POST http://localhost:8082/api/billings/pending
+Content-Type: application/json
+
+{
+    "customer_id": 1
+}
+
+### Billings (Payed)
+
+POST http://localhost:8082/api/billings/payed
+Content-Type: application/json
+
+{
+    "customer_id": 1
+}
+
+### Customer Fetch
+
+GET http://localhost:8082/api/customers/1
+Content-Type: application/json
