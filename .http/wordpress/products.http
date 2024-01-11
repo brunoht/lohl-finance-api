@@ -1,4 +1,0 @@
-### All Products
-
-GET https://ddd4bb36e97a.ngrok.app/wp-json/wc/v3/products
-Authorization: Basic {{WP_CONSUMER_KEY}} {{WP_CONSUMER_SECRET}}
