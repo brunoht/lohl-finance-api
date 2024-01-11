@@ -71,4 +71,14 @@ class Payment extends Model
         $this->update($data);
         return self::where('id', $this->id)->first();
     }
+
+    public function customer()
+    {
+        return $this->hasOne(Customer::class, 'id', 'customer_id');
+    }
+
+    public function billing()
+    {
+        return $this->hasOne(Billing::class, 'id', 'billing_id');
+    }
 }
