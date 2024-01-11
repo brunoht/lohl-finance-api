@@ -11,18 +11,34 @@ use App\Http\Controllers\CallbackController;
 
 Route::get('/', [ApiController::class, 'index'])->name('api.index');
 
+Route::post('/payment', [PaymentController::class, 'post']);
+
 Route::any('/callback/mercadopago', [CallbackController::class, 'mercadopago']);
 
-Route::post('/authenticate', [AuthController::class, 'authenticate']);
 
-Route::post('/contracts', [ContractController::class, 'fetch']);
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ()
+{
+    Route::post('login', [AuthController::class, 'login']);
 
-Route::post('/billings/open', [BillingController::class, 'open']);
+    Route::post('logout', [AuthController::class, 'logout']);
 
-Route::post('/billings/pending', [BillingController::class, 'pending']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
 
-Route::post('/billings/payed', [BillingController::class, 'payed']);
+    Route::post('me', [AuthController::class, 'me']);
+});
 
-Route::get('/customers/{id}', [CustomerController::class, 'fetch']);
 
-Route::post('/payment', [PaymentController::class, 'post']);
+Route::group(['middleware' => 'api'], function ()
+{
+    Route::get('/contracts', [ContractController::class, 'fetch']);
+
+    Route::get('/billings/open', [BillingController::class, 'open']);
+
+    Route::get('/billings/pending', [BillingController::class, 'pending']);
+
+    Route::get('/billings/payed', [BillingController::class, 'payed']);
+
+    Route::get('/customer', [CustomerController::class, 'fetch']);
+});
+
+

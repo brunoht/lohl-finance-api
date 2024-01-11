@@ -10,12 +10,10 @@ class Customer extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'cpf',
+        'user_id',
         'birthdate',
-        'phone',
-        'whatsapp',
-        'email',
+        'phone_01',
+        'phone_02',
         'address',
         'address_number',
         'address_complement',
@@ -24,19 +22,10 @@ class Customer extends Model
         'address_city',
         'address_state',
         'address_country',
-        'notification_email',
-        'notification_whatsapp',
     ];
 
-    public function firstName()
+    public function user()
     {
-        $nameParts = explode(" ", $this->name);
-        return $nameParts[0];
-    }
-
-    public function lastName()
-    {
-        $nameParts = explode(" ", $this->name);
-        return array_slice($nameParts, -1)[0];
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }
