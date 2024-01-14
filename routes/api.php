@@ -11,6 +11,8 @@ use App\Http\Controllers\CallbackController;
 
 Route::get('/', [ApiController::class, 'index'])->name('api.index');
 
+Route::get('/unauthorized', [ApiController::class, 'unauthorized'])->name('login');
+
 Route::post('/payment', [PaymentController::class, 'post']);
 
 Route::any('/callback/mercadopago', [CallbackController::class, 'mercadopago']);
@@ -28,7 +30,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ()
 });
 
 
-Route::group(['middleware' => 'api'], function ()
+Route::group(['middleware' => 'auth:api'], function ()
 {
     Route::get('/contracts', [ContractController::class, 'fetch']);
 
