@@ -1,19 +1,36 @@
-# README
+# Lohl Finance API
 
-## Websocket Server
+Lohl Finance's backend service. Serves the REST API and Websocket.
 
-Inicie a fila:
+Developed using **[Laravel](https://laravel.com/) + [Websockets](https://beyondco.de/docs/laravel-websockets/getting-started/introduction)**.
+
+## Dev Environment
+
+> The following commands must be executed from a Linux Terminal. On Windows,
+run it by using WSL terminal.
+
+### Start containers
+
+```shell
+bash dev up
+```
+
+### Websocket Server
+
+Starts the queue:
 
 ```shell
 sail artisan queue:work
 ```
-Inicie o servider webosckets
+
+Starts webosckets' server
 
 ```shell
 sail artisan websockets:serve
 ```
 
 ## Configuring A Shell Alias
+
 By default, Sail commands are invoked using the vendor/bin/sail script that is included with all new Laravel applications:
 
 ```shell
@@ -26,42 +43,58 @@ However, instead of repeatedly typing vendor/bin/sail to execute Sail commands, 
 alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
 ```
 
-## DEV Commands
+## All available commands
 
-It's possible to prepare dev file to be executable:
+Starts container:
 
 ```shell
-chmod +x dev
+bash dev up
 ```
 
-Now, you can run dev command as:
+---
+
+Finishes container
 
 ```shell
-bash dev [command]
+bash dev down
 ```
 
+---
+
+Restarts container
+
 ```shell
-sh dev [command]
+bash dev restart
 ```
 
+---
+
+Shows a container's real-time log
+
 ```shell
-./dev [command]
+bash dev logs
 ```
 
-### Available Commands
+---
+
+Starts the container shell CLI
 
 ```shell
-bash dev up 
+bash dev exec
 ```
 
-```shell
-bash dev down 
-```
+---
+
+## Sail Commands
+
+Under the hood, it uses "Laravel Sail," so all Sail commands can be accessed normally.
 
 ```shell
-bash dev restart 
+./vendor/bin/sail --help
 ```
 
+or (if you added sail alias to your terminal) 
+
 ```shell
-bash dev logs 
+sail --help
 ```
