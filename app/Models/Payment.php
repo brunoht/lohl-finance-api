@@ -50,7 +50,8 @@ class Payment extends Model
             'payer_last_name' => $billing->contract->customer->lastName(),
             'payer_identification_type' => 'CPF',
             'payer_identification_number' => $billing->contract->customer->cpf,
-            'billing_expire_at' => $billing->expire_at
+            'billing_expire_at' => $billing->expire_at,
+            'status' => 'pending'
         ];
     }
 
