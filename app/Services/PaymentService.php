@@ -19,11 +19,21 @@ class PaymentService extends Service
 
         $billingId = $billing->id; // gets Billing's ID
 
-        if ( !$payment = $this->paymentByBillingId($billingId) ) // check if Payment exists
+        $payment = $this->paymentByBillingId($billingId);
+
+        if ( !$payment ) // check if Payment exists
         {
             $payment = $this->createPayment($billing);
 
             $data = $this->createPaymentOnMercadoPago($payment);
+
+            $payment = $this->updatePayment($payment, Payment::mercadopagoBind($data));
+
+            return $this->response(data: $payment);
+        }
+
+        elseif ($payment->status === 'approved') { // Payment exists and it is already paid
+            return $this->response(data: $payment);
         }
 
         elseif ( // Payment exists, but QrCode expired and it needs refreshing
@@ -33,6 +43,10 @@ class PaymentService extends Service
             $payment = $this->updatePayment($payment, Payment::bind($billing));
 
             $data = $this->createPaymentOnMercadoPago($payment);
+
+            $payment = $this->updatePayment($payment, Payment::mercadopagoBind($data));
+
+            return $this->response(data: $payment);
         }
 
         else // Payment exists and valid QrCode
@@ -40,15 +54,12 @@ class PaymentService extends Service
             if ($payment->status === 'pending')
             {
                 $data = $this->paymentFromMercadoPago($payment); // fetches MercadoPagos's Payment data
-            }
-            else // if Payment is finished, it only returns data
-            {
+
+                $payment = $this->updatePayment($payment, Payment::mercadopagoBind($data));
+
                 return $this->response(data: $payment);
             }
         }
-
-        // refreshes Payment using MercadoPagos's data
-        $payment = $this->updatePayment($payment, Payment::mercadopagoBind($data));
 
         return $this->response(data: $payment);
     }
