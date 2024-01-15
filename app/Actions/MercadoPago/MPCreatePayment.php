@@ -42,7 +42,7 @@ class MPCreatePayment extends Action
             'transaction_amount' => $this->payment->transaction_amount,
             'description' => $this->payment->description,
             'payment_method_id' => $this->payment->payment_method_id,
-            'date_of_expiration' => $this->payment->date_of_expiration,
+//            'date_of_expiration' => $this->payment->date_of_expiration,
             'payer' => [
                 'email' => $this->payment->payer_email,
                 'first_name' => $this->payment->payer_first_name,
