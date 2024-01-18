@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('cpf')->unique();
-            $table->string('email');
+            $table->integer('user_id');
             $table->date('birthdate')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('whatsapp')->nullable();
+            $table->string('phone_01')->nullable();
+            $table->string('phone_02')->nullable();
             $table->string('address')->nullable();
             $table->string('address_number')->nullable();
             $table->string('address_complement')->nullable();
@@ -27,8 +25,6 @@ return new class extends Migration
             $table->string('address_city')->nullable();
             $table->string('address_state')->nullable();
             $table->string('address_country')->default('Brasil');
-            $table->string('notification_email')->nullable();
-            $table->string('notification_whatsapp')->nullable();
             $table->timestamps();
         });
     }

@@ -19,6 +19,6 @@ class FetchBilling extends Action
 
     protected function handle() : Billing|null
     {
-        return Billing::where('uuid', $this->uuid)->with(['contract', 'contract.customer'])->first();
+        return Billing::where('uuid', $this->uuid)->with(['contract', 'contract.customer', 'contract.customer.user'])->first();
     }
 }

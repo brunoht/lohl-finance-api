@@ -45,11 +45,11 @@ class Payment extends Model
             'description' => $billing->description,
             'payment_method_id' => "pix",
             'date_of_expiration' => Date::addMinutes(minutes: 5, format: Date::$MERCADOPAGO_DATE_FORMAT),
-            'payer_email' => $billing->contract->customer->email,
-            'payer_first_name' => $billing->contract->customer->firstName(),
-            'payer_last_name' => $billing->contract->customer->lastName(),
+            'payer_email' => $billing->contract->customer->user->email,
+            'payer_first_name' => $billing->contract->customer->user->firstName(),
+            'payer_last_name' => $billing->contract->customer->user->lastName(),
             'payer_identification_type' => 'CPF',
-            'payer_identification_number' => $billing->contract->customer->cpf,
+            'payer_identification_number' => $billing->contract->customer->user->cpf,
             'billing_expire_at' => $billing->expire_at,
             'status' => 'pending'
         ];
@@ -71,5 +71,15 @@ class Payment extends Model
     {
         $this->update($data);
         return self::where('id', $this->id)->first();
+    }
+
+    public function customer()
+    {
+        return $this->hasOne(Customer::class, 'id', 'customer_id');
+    }
+
+    public function billing()
+    {
+        return $this->hasOne(Billing::class, 'id', 'billing_id');
     }
 }

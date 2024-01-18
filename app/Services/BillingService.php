@@ -2,33 +2,34 @@
 
 namespace App\Services;
 
+use App\Models\Customer;
 use App\Traits\HasBillingActions;
 
 class BillingService extends Service
 {
     use HasBillingActions;
 
-    public function open($customerId) : array
+    public function open(Customer $customer) : array
     {
-        $billings = $this->billingsByCustomerId($customerId);
+        $billings = $this->billingsByCustomerId($customer->id);
         return $this->response(data: $billings);
     }
 
-    public function pending($customerId) : array
+    public function pending(Customer $customer) : array
     {
-        $billings = $this->pendingBillingsByCustomerId($customerId);
+        $billings = $this->pendingBillingsByCustomerId($customer->id);
         return $this->response(data: $billings);
     }
 
-    public function payed($customerId) : array
+    public function payed(Customer $customer) : array
     {
-        $billings = $this->payedBillingsByCustomerId($customerId);
+        $billings = $this->payedBillingsByCustomerId($customer->id);
         return $this->response(data: $billings);
     }
 
-    public function expired($customerId) : array
+    public function expired(Customer $customer) : array
     {
-        $billings = $this->expiredBillingsByCustomerId($customerId);
+        $billings = $this->expiredBillingsByCustomerId($customer->id);
         return $this->response(data: $billings);
     }
 }

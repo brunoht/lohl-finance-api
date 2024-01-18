@@ -15,9 +15,10 @@ class CustomerController extends Controller
         $this->customerService = new CustomerService();
     }
 
-    public function fetch($id) : JsonResponse
+    public function fetch() : JsonResponse
     {
-        $response = $this->customerService->fetch($id);
+        $user = auth()->user()->load('customer');
+        $response = $this->customerService->fetch($user);
         return $this->responseData($response);
     }
 }

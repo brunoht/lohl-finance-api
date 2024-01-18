@@ -2,16 +2,15 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use App\Traits\HasCustomerActions;
 
 class CustomerService extends Service
 {
     use HasCustomerActions;
 
-    public function fetch(int $id) : array
+    public function fetch(User $user) : array
     {
-        $customer = $this->customer($id);
-        if ($customer) return $this->response(data: $customer);
-        return $this->response(404);
+        return $this->response(data: $user);
     }
 }

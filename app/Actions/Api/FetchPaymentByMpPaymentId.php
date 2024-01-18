@@ -19,6 +19,6 @@ class FetchPaymentByMpPaymentId extends Action
 
     protected function handle() : Payment|null
     {
-        return Payment::where('mercadopago_payment_id', $this->mercadopagoPaymentId)->first();
+        return Payment::where('mercadopago_payment_id', $this->mercadopagoPaymentId)->with(['billing'])->first();
     }
 }

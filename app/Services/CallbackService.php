@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Events\RefreshPage;
 use App\Models\Payment;
 use App\Traits\HasMercadoPagoActions;
 use App\Traits\HasPaymentActions;
@@ -31,6 +32,8 @@ class CallbackService extends Service
                 $data = $this->paymentFromMercadoPago($payment);
 
                 $this->updatePayment($payment, Payment::mercadopagoBind($data));
+
+                event(new RefreshPage($payment->billing->uuid));
             }
             else
             {
