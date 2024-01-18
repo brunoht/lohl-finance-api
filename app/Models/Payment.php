@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Utils\Date;
+use App\Helpers\Date;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

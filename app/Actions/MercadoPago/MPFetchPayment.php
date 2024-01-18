@@ -5,7 +5,7 @@ namespace App\Actions\MercadoPago;
 use App\Actions\Action;
 use App\Models\Payment;
 use App\Traits\HasActionSet;
-use App\Utils\MercadoPago;
+use App\Helpers\MercadoPago;
 
 /**
  * MercadoPago Fetch Payment

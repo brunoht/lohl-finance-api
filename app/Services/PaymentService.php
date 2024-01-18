@@ -6,7 +6,7 @@ use App\Models\Payment;
 use App\Traits\HasBillingActions;
 use App\Traits\HasMercadoPagoActions;
 use App\Traits\HasPaymentActions;
-use App\Utils\Date;
+use App\Helpers\Date;
 
 class PaymentService extends Service
 {
