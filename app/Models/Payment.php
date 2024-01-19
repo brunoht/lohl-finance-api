@@ -44,7 +44,7 @@ class Payment extends Model
             'transaction_amount' => $billing->total(),
             'description' => $billing->description,
             'payment_method_id' => "pix",
-            'date_of_expiration' => Date::addMinutes(minutes: 5, format: Date::$MERCADOPAGO_DATE_FORMAT),
+            'date_of_expiration' => Date::addMinutes(minutes: 10, format: Date::$MERCADOPAGO_DATE_FORMAT, timezone: "-04:00"),
             'payer_email' => $billing->contract->customer->user->email,
             'payer_first_name' => $billing->contract->customer->user->firstName(),
             'payer_last_name' => $billing->contract->customer->user->lastName(),

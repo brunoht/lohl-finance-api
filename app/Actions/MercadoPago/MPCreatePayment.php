@@ -6,6 +6,7 @@ use App\Actions\Action;
 use App\Models\Payment;
 use App\Traits\HasActionSet;
 use App\Helpers\MercadoPago;
+use Illuminate\Support\Facades\Log;
 
 /**
  * MercadoPago Create Payment
@@ -30,8 +31,12 @@ class MPCreatePayment extends Action
 
     protected function handle() : array|null
     {
-        $response = $this->mercadoPago->post('/payments', $this->data());
+        $response = $this->mercadoPago->post('/payments', $this->data(), headers: [
+            'X-Idempotency-Key' => 'payment-' . $this->data()['external_reference']
+        ]);
+
         if ($response->status() === 201) return $response->json();
+
         return null;
     }
 
@@ -42,7 +47,7 @@ class MPCreatePayment extends Action
             'transaction_amount' => $this->payment->transaction_amount,
             'description' => $this->payment->description,
             'payment_method_id' => $this->payment->payment_method_id,
-//            'date_of_expiration' => $this->payment->date_of_expiration,
+            'date_of_expiration' => $this->payment->date_of_expiration,
             'additional_info' => [
                 'payer' => [
                     'first_name' => $this->payment->payer_first_name,
@@ -71,5 +76,4 @@ class MPCreatePayment extends Action
             ]
         ];
     }
-
 }
