@@ -11,7 +11,7 @@ class RefreshPage extends Command
      *
      * @var string
      */
-    protected $signature = 'app:refresh-page';
+    protected $signature = 'app:refresh {billing_uuid}';
 
     /**
      * The console command description.
@@ -25,6 +25,12 @@ class RefreshPage extends Command
      */
     public function handle()
     {
-        event(new \App\Events\RefreshPage('hello world'));
+        $billingUuid = $this->argument('billing_uuid');
+
+        event(new \App\Events\RefreshPage($billingUuid));
+
+        $this->info('Sent refresh event to billing ' . $billingUuid);
+
+        return 0;
     }
 }
