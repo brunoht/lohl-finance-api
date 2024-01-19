@@ -85,6 +85,14 @@ bash dev exec
 
 ---
 
+Sail
+
+```shell
+bash dev sail "command"
+```
+
+---
+
 ## Sail Commands
 
 Under the hood, it uses "Laravel Sail," so all Sail commands can be accessed normally.
@@ -97,4 +105,10 @@ or (if you added sail alias to your terminal)
 
 ```shell
 sail --help
+```
+
+also, you can call sail from dev cli:
+
+```shell
+bash dev sail "--help"
 ```
