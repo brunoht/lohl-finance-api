@@ -17,6 +17,8 @@ Route::post('/payment', [PaymentController::class, 'post']);
 
 Route::any('/callback/mercadopago', [CallbackController::class, 'mercadopago']);
 
+Route::any('/debug', [ApiController::class, 'debug']);
+
 
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ()
 {
