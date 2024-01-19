@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use Carbon\Carbon;
 use DateTime;
 use DateTimeZone;
 use Exception;
@@ -30,11 +31,10 @@ class Date
      * @return string|DateTime
      * @throws Exception
      */
-    public static function addMinutes(int $minutes, string $format, bool $formatted = true) : string|DateTime
+    public static function addMinutes(int $minutes, string $format, bool $formatted = true, string $timezone = "-03:00") : string|DateTime
     {
-        $dateTimezone = new DateTimeZone("America/Sao_Paulo");
-        $date = new DateTime("now", $dateTimezone);
-        $date->modify("+{$minutes} minutes");
+        $now = Carbon::now()->setTimezone($timezone);
+        $date = $now->addMinutes($minutes);
         return $formatted ? $date->format($format) : $date;
     }
 
