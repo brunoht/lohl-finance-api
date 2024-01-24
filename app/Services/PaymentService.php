@@ -6,7 +6,7 @@ use App\Models\Payment;
 use App\Traits\HasBillingActions;
 use App\Traits\HasMercadoPagoActions;
 use App\Traits\HasPaymentActions;
-use App\Helpers\Date;
+use Carbon\Carbon;
 
 class PaymentService extends Service
 {
@@ -21,7 +21,7 @@ class PaymentService extends Service
 
         $payment = $this->paymentByBillingId($billingId);
 
-        if ( !$payment ) // check if Payment exists
+        if ( !$payment || $payment->mercadopago_payment_id === null ) // check if Payment exists
         {
             $payment = $this->createPayment($billing);
 
@@ -36,24 +36,19 @@ class PaymentService extends Service
             return $this->response(data: $payment);
         }
 
-        elseif ( // Payment exists, but QrCode expired and it needs refreshing
-            $payment->mercadopago_payment_id === null
-            || Date::diff($payment->date_of_expiration ) <= 0
-        ) {
-            $payment = $this->updatePayment($payment, Payment::bind($billing));
-
-            $data = $this->createPaymentOnMercadoPago($payment);
-
-            $payment = $this->updatePayment($payment, Payment::mercadopagoBind($data));
-
-            return $this->response(data: $payment);
-        }
-
-        else // Payment exists and valid QrCode
+        else // Payment exists but it is not paid
         {
             if ($payment->status === 'pending')
             {
                 $data = $this->paymentFromMercadoPago($payment); // fetches MercadoPagos's Payment data
+
+                $expiration = Carbon::make($data['date_of_expiration']);
+                $now = Carbon::now()->setTimezone('-04:00');
+
+                if ($data['status'] !== 'approved' && $now->diffInSeconds($expiration) <= 0)
+                {
+                    $data = $this->createPaymentOnMercadoPago($payment);
+                }
 
                 $payment = $this->updatePayment($payment, Payment::mercadopagoBind($data));
 

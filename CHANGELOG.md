@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.4
+
+- fix: fixed billing not listed after paid
+
 ## v0.0.3
 
 - fix: added required fields for Mercadopago's Payment data

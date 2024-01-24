@@ -25,7 +25,7 @@ class FetchPayedBillingsByCustomerId extends Action
 
         return Billing::whereIn('contract_id', $contractIds)
             ->with(['contract', 'contract.product', 'items', 'payment'])
-            ->whereRelation('payment', 'status', 'success')
+            ->whereRelation('payment', 'status', 'approved')
             ->get();
     }
 }
