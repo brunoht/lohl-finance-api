@@ -20,13 +20,13 @@ bash dev up
 Starts the queue:
 
 ```shell
-sail artisan queue:work
+bash dev sail "artisan queue:work"
 ```
 
 Starts webosckets' server
 
 ```shell
-sail artisan websockets:serve
+bash dev sail "artisan websockets:serve"
 ```
 
 ## Configuring A Shell Alias
