@@ -23,7 +23,7 @@ class CallbackService extends Service
 //        if ($this->signature !== $signature)
 //            return $this->response(code: 401, message: 'Request not verified');
 
-        if ($type === 'payment' && $action === "payment.update")
+        if ($type === 'payment' && $action === "payment.updated")
         {
             $payment = $this->paymentByMpPaymentId($mercadopagoPaymentId);
 

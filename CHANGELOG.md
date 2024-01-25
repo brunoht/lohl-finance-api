@@ -3,6 +3,7 @@
 ## v0.0.4
 
 - fix: fixed billing not listed after paid
+- fix: auto refresh page after pix payment
 
 ## v0.0.3
 
