@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.5
+
+- fix: cors and web routes
+
 ## v0.0.4
 
 - fix: fixed billing not listed after paid
