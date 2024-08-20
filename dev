@@ -1,12 +1,10 @@
 #! /bin/bash
 
-
 case $1 in
 up) ./vendor/bin/sail up -d --remove-orphans ;;
 down) ./vendor/bin/sail stop ;;
 restart) ./vendor/bin/sail stop && ./vendor/bin/sail up -d ;;
 logs) ./vendor/bin/sail logs -f ;;
 exec) ./vendor/bin/sail shell ;;
-sail) ./vendor/bin/sail $2 ;;
 *) echo "Comando não encontrado" ;;
 esac
