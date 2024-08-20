@@ -4,6 +4,59 @@ Lohl Finance's backend service. Serves the REST API and Websocket.
 
 Developed using **[Laravel](https://laravel.com/) + [Websockets](https://beyondco.de/docs/laravel-websockets/getting-started/introduction)**.
 
+## Requisites
+
+### Linux
+- Linux Ubuntu 20 or superior
+- Docker
+- Docker Composer
+
+### Windows
+
+- WSL2
+- Ubuntu
+- Docker Desktop
+
+### VSCode
+
+- Install [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) extension
+
+## Install
+
+### Install PHP
+
+```shell
+sudo apt update && sudo apt upgrade
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:ondrej/php
+sudo apt update
+sudo apt install php8.2-fpm
+sudo apt install php8.2-mysql php8.2-mbstring php8.2-xml php8.2-gd php8.2-curl php8.2-cli unzip
+```
+
+### Install Composer
+
+```shell
+cd ~
+curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
+sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+```
+
+### Environment 
+
+```shell
+cp .env.example .env
+php artisan key:generate
+php composer install
+chmod +x sail && chmod +x dev
+```
+
+### Preparar a rede virtual do Docker
+
+```shell
+docker network create -d bridge shared-network
+```
+
 ## Dev Environment
 
 > The following commands must be executed from a Linux Terminal. On Windows,
@@ -12,7 +65,7 @@ run it by using WSL terminal.
 ### Start containers
 
 ```shell
-bash dev up
+. dev up
 ```
 
 ### Websocket Server
@@ -20,13 +73,13 @@ bash dev up
 Starts the queue:
 
 ```shell
-bash dev sail "artisan queue:work"
+. sail artisan queue:work
 ```
 
 Starts webosckets' server
 
 ```shell
-bash dev sail "artisan websockets:serve"
+. sail artisan websockets:serve
 ```
 
 ## Configuring A Shell Alias
@@ -48,7 +101,7 @@ alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
 Starts container:
 
 ```shell
-bash dev up
+. dev up
 ```
 
 ---
@@ -56,7 +109,7 @@ bash dev up
 Finishes container
 
 ```shell
-bash dev down
+. dev down
 ```
 
 ---
@@ -64,7 +117,7 @@ bash dev down
 Restarts container
 
 ```shell
-bash dev restart
+. dev restart
 ```
 
 ---
@@ -72,7 +125,7 @@ bash dev restart
 Shows a container's real-time log
 
 ```shell
-bash dev logs
+. dev logs
 ```
 
 ---
@@ -80,7 +133,7 @@ bash dev logs
 Starts the container shell CLI
 
 ```shell
-bash dev exec
+. dev exec
 ```
 
 ---
@@ -88,7 +141,7 @@ bash dev exec
 Sail
 
 ```shell
-bash dev sail "command"
+. sail
 ```
 
 ---
@@ -110,5 +163,5 @@ sail --help
 also, you can call sail from dev cli:
 
 ```shell
-bash dev sail "--help"
+. sail --help
 ```
