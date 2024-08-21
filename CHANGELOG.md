@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.0.5
+
+- feat: separate sail bash command
+- docs: update readme
+- fix: removed Livewire
+- fix: changed default variables in .env.example
+- feat: included uninstall command to dev
+
 ## v0.0.4
 
 - fix: fixed billing not listed after paid
