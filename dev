@@ -6,5 +6,6 @@ down) ./vendor/bin/sail stop ;;
 restart) ./vendor/bin/sail stop && ./vendor/bin/sail up -d ;;
 logs) ./vendor/bin/sail logs -f ;;
 exec) ./vendor/bin/sail shell ;;
+uninstall) docker-compose down --rmi all --volumes --remove-orphans ;;
 *) echo "Comando não encontrado" ;;
 esac
