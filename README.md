@@ -68,6 +68,12 @@ run it by using WSL terminal.
 . dev up
 ```
 
+On the first time, run database migration:
+
+```shell
+. sail artisan migrate
+```
+
 ### Websocket Server
 
 Starts the queue:
