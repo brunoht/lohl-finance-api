@@ -72,6 +72,7 @@ On the first time, run database migration:
 
 ```shell
 . sail artisan migrate
+. sail artisan jwt:secret
 ```
 
 ### Websocket Server
