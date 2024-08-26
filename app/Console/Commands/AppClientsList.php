@@ -4,32 +4,34 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class RefreshPage extends Command
+class AppClientsList extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:refresh {billing_uuid}';
+    protected $signature = 'app:clients-list';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Send a refresh event to the billing page';
+    protected $description = 'List all clients';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        $billingUuid = $this->argument('billing_uuid');
-
-        event(new \App\Events\RefreshPage($billingUuid));
-
-        $this->info('Sent refresh event to billing ' . $billingUuid);
+        // clear the console
+        system('clear');
+        
+        $this->table(
+            ['ID', 'Name', 'Email', 'Whatsapp'],
+            \App\Models\User::all(['id', 'name', 'email', 'whatsapp'])->toArray()
+        );
 
         return 0;
     }
