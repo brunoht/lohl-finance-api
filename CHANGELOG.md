@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.0.6
+
+- docs: readme, http client
+- feat: added cli commands
+
 ## v0.0.5
 
 - feat: separate sail bash command
