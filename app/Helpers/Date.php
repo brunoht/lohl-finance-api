@@ -38,6 +38,12 @@ class Date
         return $formatted ? $date->format($format) : $date;
     }
 
+    /**
+     * @param string $date
+     * @param string|null $compareDate
+     * @return int
+     * @throws Exception
+     */
     public static function diff(string $date, string $compareDate = null)
     {
         $date1 = DateTime::createFromFormat(Date::$MERCADOPAGO_DATE_FORMAT, $date);
@@ -45,5 +51,39 @@ class Date
         $diff = $date1->diff($date2);
 
         return $date1 >= $date2 ? $diff->i : -1*$diff->i;
+    }
+
+    /**
+     * @param string $date
+     * @param string $format
+     * @return string
+     * @throws Exception
+     */
+    public static function format(string $date, string $fromFormat, string $toFormat) : string
+    {
+        $date = DateTime::createFromFormat($fromFormat, $date);
+        return $date->format($toFormat);
+    }
+
+    /**
+     * @param string $date
+     * @return string
+     */
+    public static function formatFromConsole(string $date) : string
+    {
+        $newDate = explode('/', $date);
+        $newDate = $newDate[2] . '-' . $newDate[1] . '-' . $newDate[0];
+        return $newDate;
+    }
+
+    /**
+     * @param string $date
+     * @return string
+     */
+    public static function formatToConsole(string $date) : string
+    {
+        $newDate = explode('-', $date);
+        $newDate = $newDate[2] . '/' . $newDate[1] . '/' . $newDate[0];
+        return $newDate;
     }
 }
