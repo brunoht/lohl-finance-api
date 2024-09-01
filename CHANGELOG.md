@@ -4,6 +4,10 @@
 
 - docs: readme, http client
 - feat: added cli commands
+- feat: added console form
+- refactor: changged signature on commands
+- feat: implement console form
+- feat: improved helpers
 
 ## v0.0.5
 
