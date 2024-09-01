@@ -8,6 +8,7 @@
 - refactor: changged signature on commands
 - feat: implement console form
 - feat: improved helpers
+- docs: added developers guide
 
 ## v0.0.5
 
