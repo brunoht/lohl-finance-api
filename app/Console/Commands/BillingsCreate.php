@@ -31,7 +31,7 @@ class BillingsCreate extends Command
      *
      * @var string
      */
-    protected $signature = 'app:billings-create';
+    protected $signature = 'billing:create';
 
     /**
      * The console command description.
@@ -69,11 +69,13 @@ class BillingsCreate extends Command
                 ->first()
                 ->toArray();
 
+            // create billing
             $billing = $this->createBilling
                 ->params(['product' => $product, 'contract' => $contract])
                 ->first()
                 ->toArray();
 
+            // add billing to the list
             $billings[] = [
                 'uuid' => $billing['uuid'],
                 'customer' => $billing['contract']['customer']['user']['name'],

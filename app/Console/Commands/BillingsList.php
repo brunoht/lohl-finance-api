@@ -12,7 +12,7 @@ class BillingsList extends Command
      *
      * @var string
      */
-    protected $signature = 'app:billings-list';
+    protected $signature = 'billing:list';
 
     /**
      * The console command description.

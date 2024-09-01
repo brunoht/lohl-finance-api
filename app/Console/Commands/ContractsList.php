@@ -12,7 +12,7 @@ class ContractsList extends Command
      *
      * @var string
      */
-    protected $signature = 'app:contracts-list';
+    protected $signature = 'contract:list';
 
     /**
      * The console command description.
