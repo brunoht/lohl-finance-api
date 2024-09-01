@@ -30,14 +30,16 @@ class CustomerCreate extends Command implements FormInterface
      */
     public function handle()
     {
+        // Set the method
+        $method = Form::METHOD_CREATE;
+
         // Get options
         $showAll = $this->option('all');
         $sleep = $this->option('sleep');
         $reveal = $this->option('reveal');
-        $method = Form::METHOD_CREATE;
 
         // Create a new form
-        $form = new Form($this, $showAll, $sleep, $reveal, $method);
+        $form = new Form($this, $method, $showAll, $sleep, $reveal);
 
         // Run the form
         $form->run();

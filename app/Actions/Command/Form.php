@@ -90,24 +90,24 @@ class Form
      * Instantiate the form
      *
      * @param Command $command
+     * @param string $method
      * @param bool $showAll
      * @param int $sleep
      * @param bool $reveal
-     * @param string $method
      */
     public function __construct(
         Command $command,
+        string $method = self::METHOD_CREATE,
         bool $showAll = false,
         int $sleep = 1,
         bool $reveal = false,
-        string $method = self::METHOD_CREATE
     ) {
         $this->command = $command;
+        $this->method = $method;
         $this->showAll = $showAll;
         $this->title = null;
         $this->sleep = $sleep;
         $this->reveal = $reveal;
-        $this->method = $method;
     }
 
     /**
@@ -346,9 +346,9 @@ class Form
         }
     }
 
-    /* ===================================================================== */
-    /*                             VALIDATION RULES                          */
-    /* ===================================================================== */
+    /* ====================================================================== */
+    /*                             VALIDATION RULES                           */
+    /* ====================================================================== */
 
     private function rule_required($key, $value, $label, $params) : void
     {
